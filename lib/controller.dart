@@ -24,7 +24,10 @@ class WindowsMapController {
   Map<int,_BasePolygon> _polygons={};
 
   WindowsMapController() {
-    _webMessages = _webviewController.webMessage.asBroadcastStream();
+   _webMessages = _webviewController.webMessage
+    .cast<Map<dynamic, dynamic>>()
+    .asBroadcastStream();
+
     _webMessages.listen((data) {
       //listen to events
       switch (data[_EVENT_TYPE]) {
